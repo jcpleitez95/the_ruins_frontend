@@ -11,12 +11,8 @@ export default function useShoot(maxSteps) {
     };
 
     function shoot(dir){
-        setBowDir(prev => {
-            if(directions[dir] === prev){
-                setBowStep(prev => prev < maxSteps - 1 ? prev + 1 : 0)
-            };
-            return directions[dir];
-        }); 
+        setBowDir(directions[dir])
+        setBowStep(prev => prev < maxSteps - 1 ? prev + 1 : 0)
     }
 
     return {

@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Actor from './Actor'
 import useKeyPress from './hooks/useKeyPress'
 import useWalk from './hooks/useWalk'
 import useShoot from './hooks/useShoot'
 
+
 export default function Player() {
+    const [isWalking, setIsWalking] = useState(false)
     let {dir, step, walk, position} = useWalk(9)
     const {bowDir, bowStep, shoot} = useShoot(13)
     
@@ -17,16 +19,20 @@ export default function Player() {
         if (e.key.includes("Arrow")) {
             walk(e.key)
             e.preventDefault()
+            setIsWalking(true)
         }
         else if (e.key === " ") {
             shoot(dir.toString())
-            dir = bowDir
-            step = bowStep
+            e.preventDefault()
+            setIsWalking(false)
         }
     })
-    console.log(dir)
-
+    
+    if (isWalking) return (
+        <Actor data={data} step={step} dir={dir} position={position}/>
+    )
+    
     return (
-    <Actor data={data} step={step} dir={dir} position={position}/>
+    <Actor data={data} step={bowStep} dir={bowDir} position={position}/>
     )
 }

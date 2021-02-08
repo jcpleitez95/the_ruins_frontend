@@ -45,3 +45,15 @@ a {
 .user-nav-div{
   width: 100%;
 }
+
+.map-container{
+  position: relative;
+}
+
+.ammo{
+  position: absolute;
+}
+
+.life-point{
+  position: absolute;
+}

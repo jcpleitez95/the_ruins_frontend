@@ -17,8 +17,12 @@ a {
   margin-right: 5px;
   margin-left: 5px;
 }
+.game-container{
+  display:inline-block;
+}
 
 .game {
+  display: inline-block;
   margin-left: 5px;
   margin-bottom: 10px;
   height: 750px;
@@ -27,6 +31,17 @@ a {
   overflow: hidden;
   position: relative;
   background-color: lightblue;
+}
+.character-info{
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  height: 750px;
+  width: 250px;
+  border: 1px solid black;
 }
 .map{
   image-rendering: pixelated;

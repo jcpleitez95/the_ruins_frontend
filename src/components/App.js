@@ -9,39 +9,12 @@ import SignUp from './SignUp';
 import About from './About';
 
 function App() {
-  const [ammos, setAmmos] = useState([])
-  const [map, setMap] = useState("")
-  const [lifePoints, setLifePoints] = useState([])
-    
+  const [character, setCharacter] = useState("")
+  
   useEffect(() => {
-    fetch("http://localhost:3000/ammos")
+    fetch("http://localhost:3000/characters/5")
     .then(response => response.json())
-    .then(data => setAmmos(data.map(ammo => <img key={ammo.id} className="ammo" src={ammo.image} alt="ammo" style={{
-      bottom: Math.floor(Math.random() * 2650),
-      right: Math.floor(Math.random() * 2600)
-  }}/>)))
-}, []);
-
-useEffect(() => {
-  fetch("http://localhost:3000/life_points")
-  .then(response => response.json())
-  .then(data => setLifePoints(data.map(lifePoint => <div key={lifePoint.id} className="life-point" style={{
-    display: "inline-block",
-    position: "absolute",
-    height: 16,
-    width: 16,
-    backgroundImage: `url(${lifePoint.image})`,
-    backgroundPosition: '-16px -1px',
-    bottom: Math.floor(Math.random() * 2650),
-    right: Math.floor(Math.random() * 2600)
-    }}></div>
-  )))
-}, []);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/maps/9")
-    .then(response => response.json())
-    .then(data => setMap(data.map_image))
+    .then(data => setCharacter(data))
   }, []);
 
   return (
@@ -52,7 +25,7 @@ useEffect(() => {
         </Route>
         <Switch>
           <Route exact path="/">
-            <Game ammos={ammos} map={map} lifePoints={lifePoints}/>
+            <Game character={character} setCharacter={setCharacter}/>
             <UserInfo />
           </Route>
           <Route exact path="/about">

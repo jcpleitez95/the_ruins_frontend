@@ -5,7 +5,7 @@ import useWalk from './hooks/useWalk'
 import useShoot from './hooks/useShoot'
 
 
-export default function Player(character) {
+export default function Player(character, setCharacter) {
     const [isWalking, setIsWalking] = useState(false)
     let {dir, step, walk, position} = useWalk(9)
     const {bowDir, bowStep, shoot} = useShoot(13)
@@ -29,10 +29,10 @@ export default function Player(character) {
     })
     
     if (isWalking) return (
-        <Actor data={data} step={step} dir={dir} position={position} character={character}/>
+        <Actor data={data} step={step} dir={dir} position={position} character={character} setCharacter={setCharacter}/>
     )
     
     return (
-    <Actor data={data} step={bowStep} dir={bowDir} position={position} character={character}/>
+    <Actor data={data} step={bowStep} dir={bowDir} position={position} character={character} setCharacter={setCharacter}/>
     )
 }

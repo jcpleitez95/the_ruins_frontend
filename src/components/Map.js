@@ -1,10 +1,7 @@
 import React, {useEffect} from 'react'
 
-export default function Map({position, map, ammos, lifePoints, character, setCharacter}) {
-    console.log(ammos)
-    console.log(lifePoints)
-    console.log(character)
-
+export default function Map({position, map, ammos, lifePoints, character, setCharacter, enemies}) {
+    console.log(enemies)
     useEffect(() => {
         if(ammos.length !== 0){
             if (position.x + ammos[0].props.style.bottom >= 2760 && position.x + ammos[0].props.style.bottom <= 2780 && position.y + ammos[0].props.style.right >= 2640 && position.y + ammos[0].props.style.right <= 2660){
@@ -70,6 +67,7 @@ export default function Map({position, map, ammos, lifePoints, character, setCha
             }}>
             {ammos}
             {lifePoints}
+            {enemies}
             </div>
         </div>
         )

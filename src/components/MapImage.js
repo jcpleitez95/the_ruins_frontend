@@ -6,6 +6,8 @@ export default function MapImage({map, character, setCharacter}) {
     const [position, setPosition] = useState({x: 2650, y: 2600});
     const [ammos, setAmmos] = useState([])
     const [lifePoints, setLifePoints] = useState([])
+    const [enemies, setEnemies] = useState([])
+    console.log(enemies)
     
     useEffect(() => {
         fetch("http://localhost:3000/ammos")
@@ -29,6 +31,22 @@ export default function MapImage({map, character, setCharacter}) {
           width: 16,
           backgroundImage: `url(${lifePoint.image})`,
           backgroundPosition: '-16px -1px',
+          bottom: Math.floor(Math.random() * 2650),
+          right: Math.floor(Math.random() * 2600)
+          }}></div>
+        )))
+      }, []);
+
+      useEffect(() => {
+        fetch("http://localhost:3000/enemies")
+        .then(response => response.json())
+        .then(data => setEnemies(data.map(enemy => <div key={enemy.id} className="enemy" style={{
+          display: "inline-block",
+          position: "absolute",
+          height: 64,
+          width: 64,
+          backgroundImage: `url(${enemy.enemy_sprite})`,
+          backgroundPosition: '-1px -512px',
           bottom: Math.floor(Math.random() * 2650),
           right: Math.floor(Math.random() * 2600)
           }}></div>
@@ -67,6 +85,6 @@ export default function MapImage({map, character, setCharacter}) {
     })
 
     return (
-        <MapActor ammos={ammos} position={position} map={map} lifePoints={lifePoints} character={character} setCharacter={setCharacter}/>
+        <MapActor ammos={ammos} position={position} map={map} lifePoints={lifePoints} character={character} setCharacter={setCharacter} enemies={enemies}/>
     )
 }

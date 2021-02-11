@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Player from './Player'
 import MapImage from './MapImage'
 
-export default function Game({ lifePoints, character, setCharacter}) {
+export default function Game({ lifePoints, character, setCharacter, handleRestart}) {
 
     const [map, setMap] = useState("")
     const [isLoaded, setIsLoaded] = useState(false)
@@ -15,6 +15,7 @@ export default function Game({ lifePoints, character, setCharacter}) {
       
       if(!isLoaded) return <h1>Loading...</h1>
 
+
     return (
         <div className="game-container">
             <div className="game" >
@@ -25,6 +26,7 @@ export default function Game({ lifePoints, character, setCharacter}) {
                 <h2>Kukulkan</h2>
                 <h3>HP: {character.hp}</h3>
                 <h3>Arrows: {character.ammo}</h3>
+                <button onClick={handleRestart}>Restart Level</button>
             </div>
         </div>
     )

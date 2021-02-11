@@ -1,58 +1,57 @@
 import React, {useEffect} from 'react'
 
 export default function Map({position, map, ammos, lifePoints, character, setCharacter, enemies}) {
-    console.log(enemies)
-    useEffect(() => {
-        if(ammos.length !== 0){
-            if (position.x + ammos[0].props.style.bottom >= 2760 && position.x + ammos[0].props.style.bottom <= 2780 && position.y + ammos[0].props.style.right >= 2640 && position.y + ammos[0].props.style.right <= 2660){
-                if(character.ammo < 30) {fetch(`http://localhost:3000/characters/${character.id}`,{
+    
+   useEffect(() => {
+       if(enemies.length !== 0){
+           enemies.forEach(enemy => {
+            if (position.x + enemy.props.style.bottom >= 2760 && position.x + enemy.props.style.bottom <= 2780 && position.y + enemy.props.style.right >= 2610 && position.y + enemy.props.style.right <= 2630){
+                if(character.hp > 0) {fetch(`http://localhost:3000/characters/${character.id}`,{
                    method: 'PATCH',
                    headers: {
                        "Content-Type": "application/json"
                    },
-                   body: JSON.stringify({ammo: 30})
+                   body: JSON.stringify({hp: character.hp - 1})
                })
                .then(response => response.json())
                .then(data => setCharacter(data))}
             }
-            else if (position.x + ammos[1].props.style.bottom >= 2760 && position.x + ammos[1].props.style.bottom <= 2780 && position.y + ammos[1].props.style.right >= 2640 && position.y + ammos[1].props.style.right <= 2660){
-                if(character.ammo < 30)fetch(`http://localhost:3000/characters/${character.id}`,{
-                   method: 'PATCH',
-                   headers: {
-                       "Content-Type": "application/json"
-                   },
-                   body: JSON.stringify({ammo: 30})
-               })
-               .then(response => response.json())
-               .then(data => setCharacter(data))
-            }
+           });
+       }
+   }, [character, position, enemies, setCharacter])
+
+    useEffect(() => {
+        if(ammos.length !== 0){
+            ammos.forEach(ammo => {
+                if (position.x + ammo.props.style.bottom >= 2760 && position.x + ammo.props.style.bottom <= 2780 && position.y + ammo.props.style.right >= 2640 && position.y + ammo.props.style.right <= 2660){
+                    if(character.ammo < 30) {fetch(`http://localhost:3000/characters/${character.id}`,{
+                    method: 'PATCH',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ammo: 30})
+                })
+                .then(response => response.json())
+                .then(data => setCharacter(data))}
+                }})
         }
       }, [ammos, character.ammo, character.id, position.x, position.y, setCharacter]);
 
       useEffect(() => {
         if(lifePoints.length !== 0){
-            if (position.x + lifePoints[0].props.style.bottom >= 2760 && position.x + lifePoints[0].props.style.bottom <= 2780 && position.y + lifePoints[0].props.style.right >= 2640 && position.y + lifePoints[0].props.style.right <= 2660){
-                if(character.hp < 100) {fetch(`http://localhost:3000/characters/${character.id}`,{
-                   method: 'PATCH',
-                   headers: {
-                       "Content-Type": "application/json"
-                   },
-                   body: JSON.stringify({hp: character.hp + 25})
-               })
-               .then(response => response.json())
-               .then(data => setCharacter(data))}
-            }
-            else if (position.x + lifePoints[1].props.style.bottom >= 2760 && position.x + lifePoints[1].props.style.bottom <= 2780 && position.y + lifePoints[1].props.style.right >= 2640 && position.y + lifePoints[1].props.style.right <= 2660){
-                if(character.hp < 100){fetch(`http://localhost:3000/characters/${character.id}`,{
-                   method: 'PATCH',
-                   headers: {
-                       "Content-Type": "application/json"
-                   },
-                   body: JSON.stringify({hp: character.hp + 25})
-               })
-               .then(response => response.json())
-               .then(data => setCharacter(data))}
-            }
+            lifePoints.forEach(lifePoint => {
+                if (position.x + lifePoint.props.style.bottom >= 2760 && position.x + lifePoint.props.style.bottom <= 2780 && position.y + lifePoint.props.style.right >= 2640 && position.y + lifePoint.props.style.right <= 2660){
+                    if(character.hp < 100) {fetch(`http://localhost:3000/characters/${character.id}`,{
+                       method: 'PATCH',
+                       headers: {
+                           "Content-Type": "application/json"
+                       },
+                       body: JSON.stringify({hp: character.hp + 1})
+                   })
+                   .then(response => response.json())
+                   .then(data => setCharacter(data))}
+                }
+            })
         }
       }, [lifePoints, character.hp, character.id, position.x, position.y, setCharacter]);
 

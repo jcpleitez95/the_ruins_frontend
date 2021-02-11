@@ -162,6 +162,26 @@ export default function Sprite({data, character, setCharacter}) {
         }
     }, [character, data, h, w, x, y, setCharacter])
 
+    
+    if(character.character.hp === 0){
+        return (
+            <div style={{
+            display: "inline-block",
+            position: "absolute",
+            bottom: 325,
+            right: 525,
+            height: `${h}px`,
+            width: `${w}px`,
+            backgroundImage: `url(${character.character.character_sprite})`,
+            backgroundPosition: ` -320px -1280px`,
+            backgroundRepeat: "no-repeat",
+            imageRendering: "pixelated",
+
+        }}>
+        </div>
+        )
+    }
+
 
     return (
         <div style={{

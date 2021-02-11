@@ -14,16 +14,21 @@ export default function Player(character, setCharacter) {
         h:64,
         w:64,
     };
-
+    
     useKeyPress((e) => {
-        if (e.key.includes("Arrow")) {
-            walk(e.key)
-            e.preventDefault()
-            setIsWalking(true)
+        if (character.character.hp > 0){
+            if (e.key.includes("Arrow")) {
+                walk(e.key)
+                e.preventDefault()
+                setIsWalking(true)
+            }
+            else if (e.key === " ") {
+                shoot(dir.toString())
+                e.preventDefault()
+                setIsWalking(false)
+            }
         }
-        else if (e.key === " ") {
-            shoot(dir.toString())
-            e.preventDefault()
+        else if(character.character.hp === 0){
             setIsWalking(false)
         }
     })

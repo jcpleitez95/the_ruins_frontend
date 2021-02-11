@@ -17,6 +17,23 @@ function App() {
     .then(data => setCharacter(data))
   }, []);
 
+  function handleRestart(){
+        fetch("http://localhost:3000/characters/7",{
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "hp": 100
+            })
+        })
+        .then(response => response.json())
+        .then(data => {setCharacter(data)})
+
+        window.location.reload()
+      };
+
+
   return (
     <div className="root">
         <Route>
@@ -25,7 +42,7 @@ function App() {
         </Route>
         <Switch>
           <Route exact path="/">
-            <Game character={character} setCharacter={setCharacter}/>
+            <Game character={character} setCharacter={setCharacter} handleRestart={handleRestart}/>
             <UserInfo />
           </Route>
           <Route exact path="/about">

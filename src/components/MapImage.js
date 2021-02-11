@@ -7,7 +7,6 @@ export default function MapImage({map, character, setCharacter}) {
     const [ammos, setAmmos] = useState([])
     const [lifePoints, setLifePoints] = useState([])
     const [enemies, setEnemies] = useState([])
-    console.log(enemies)
     
     useEffect(() => {
         fetch("http://localhost:3000/ammos")
@@ -54,31 +53,40 @@ export default function MapImage({map, character, setCharacter}) {
       }, []);
 
     useKeyPress((e) => {
-        if (e.key === "ArrowDown") {
-            setPosition(prev => ({
-                        x: prev.x + 20,
-                        y: prev.y
-                    }))
-            e.preventDefault()
+        if (character.hp > 0){
+            if (e.key === "ArrowDown") {
+                setPosition(prev => ({
+                            x: prev.x + 20,
+                            y: prev.y
+                        }))
+                e.preventDefault()
+            }
+            else if(e.key === "ArrowUp"){
+                setPosition(prev => ({
+                    x: prev.x - 20,
+                    y: prev.y
+                }))
+                e.preventDefault()
+            }
+            else if(e.key === "ArrowRight"){
+                setPosition(prev => ({
+                    x: prev.x,
+                    y: prev.y + 20
+                }))
+                e.preventDefault()
+            }
+            else if(e.key === "ArrowLeft"){
+                setPosition(prev => ({
+                    x: prev.x,
+                    y: prev.y - 20
+                }))
+                e.preventDefault()
+            }
         }
-        else if(e.key === "ArrowUp"){
+        else if(character.hp === 0){
             setPosition(prev => ({
-                x: prev.x - 20,
+                x: prev.x,
                 y: prev.y
-            }))
-            e.preventDefault()
-        }
-        else if(e.key === "ArrowRight"){
-            setPosition(prev => ({
-                x: prev.x,
-                y: prev.y + 20
-            }))
-            e.preventDefault()
-        }
-        else if(e.key === "ArrowLeft"){
-            setPosition(prev => ({
-                x: prev.x,
-                y: prev.y - 20
             }))
             e.preventDefault()
         }

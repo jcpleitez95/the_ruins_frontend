@@ -5,23 +5,16 @@ export default function NavBar() {
     return (
         <nav className="nav-bar">
             <div className="user-nav-div">
-                <NavLink exact to={"/login"}>
-                    Login
-                </NavLink>
                 
-                <NavLink exact to={"/signup"}>
-                    SignUp
-                </NavLink>
-                
-                <NavLink exact to={`/about`} className="nav-button">
+                <NavLink exact to={`/about`} style={{fontFamily: "fantasy", color: "white"}}>
                     About
                 </NavLink>
                 
-                <NavLink exact to={'/'}>
+                <NavLink exact to={'/'} style={{fontFamily: "fantasy", color:"white"}}>
                     Game
                 </NavLink>
                 
-                <button className="nav-button">Logout</button>
+                
             </div>
         </nav>
     )

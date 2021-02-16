@@ -1,24 +1,25 @@
 import React, {useEffect} from 'react'
 
-export default function Map({position, map, ammos, lifePoints, character, setCharacter, enemies}) {
-    
-   useEffect(() => {
-       if(enemies.length !== 0){
-           enemies.forEach(enemy => {
-            if (position.x + enemy.props.style.bottom >= 2760 && position.x + enemy.props.style.bottom <= 2780 && position.y + enemy.props.style.right >= 2610 && position.y + enemy.props.style.right <= 2630){
-                if(character.hp > 0) {fetch(`http://localhost:3000/characters/${character.id}`,{
-                   method: 'PATCH',
-                   headers: {
-                       "Content-Type": "application/json"
-                   },
-                   body: JSON.stringify({hp: character.hp - 1})
-               })
-               .then(response => response.json())
-               .then(data => setCharacter(data))}
-            }
-           });
-       }
-   }, [character, position, enemies, setCharacter])
+export default function Map({position, map, ammos, lifePoints, character, setCharacter, enemies, isJadeFound, setIsJadeFound}) {
+
+    useEffect(() => {
+        if(enemies.length !== 0){
+            enemies.forEach(enemy =>{
+                if (position.x + enemy.props.style.bottom >= 2760 && position.x + enemy.props.style.bottom <= 2780 && position.y + enemy.props.style.right >= 2610 && position.y + enemy.props.style.right <= 2630){
+                    if(character.hp > 0) {fetch(`http://localhost:3000/characters/${character.id}`,{
+                    method: 'PATCH',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({hp: character.hp - 1})
+                })
+                .then(response => response.json())
+                .then(data => setCharacter(data))}
+                }
+            })
+        }
+    }, [character, position, setCharacter, enemies])
+
 
     useEffect(() => {
         if(ammos.length !== 0){
@@ -29,7 +30,7 @@ export default function Map({position, map, ammos, lifePoints, character, setCha
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ammo: 30})
+                    body: JSON.stringify({ammo: character.ammo + 1})
                 })
                 .then(response => response.json())
                 .then(data => setCharacter(data))}
@@ -55,6 +56,17 @@ export default function Map({position, map, ammos, lifePoints, character, setCha
         }
       }, [lifePoints, character.hp, character.id, position.x, position.y, setCharacter]);
 
+      if(position.x + 1750 >= 2760 && position.x + 1750 <= 2780 && position.y + 56 >= 2640 && position.y + 56 <= 2660){
+          setIsJadeFound(true)
+          alert("You Found the Jade!")
+      }
+      if(!isJadeFound && position.x === 110 && position.y === 40){
+          alert("Kukulkan, Find the Jade")
+      }
+      if(isJadeFound && position.x === 110 && position.y === 40){
+          alert("Welcome to The Ruins, Kukulkan!")
+      }
+
     return (
         <div className="map-container">
             <div className="map" src={map} alt="map" style={{
@@ -67,6 +79,14 @@ export default function Map({position, map, ammos, lifePoints, character, setCha
             {ammos}
             {lifePoints}
             {enemies}
+            <div className="jade" style={{
+                position: "absolute",
+                width: "32px",
+                height: "32px",
+                bottom: 1750,
+                right: 56
+            }}>
+            </div>
             </div>
         </div>
         )

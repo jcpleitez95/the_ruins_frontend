@@ -21,6 +21,16 @@ a {
   display:inline-block;
 }
 
+h2 {
+  font-family: fantasy;
+}
+h3{
+  font-family: fantasy;
+}
+p{
+  font-family: fantasy;
+}
+
 .game {
   display: inline-block;
   margin-left: 5px;
@@ -30,9 +40,11 @@ a {
   border: 1px solid black;
   overflow: hidden;
   position: relative;
-  background-color: lightblue;
+  
+  background-image: url("https://i.pinimg.com/originals/6c/38/72/6c387260c0f1db12bd552c50ceafa1be.jpg");
 }
 .character-info{
+  background-color: darkcyan;
   vertical-align: top;
   display: inline-block;
   text-align: center;
@@ -40,7 +52,7 @@ a {
   margin-left: 5px;
   margin-bottom: 10px;
   height: 750px;
-  width: 250px;
+  width: 305px;
   border: 1px solid black;
 }
 .map{
@@ -49,7 +61,8 @@ a {
 }
 
 .banner{
-  width: 100%;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .banner-image{
@@ -57,8 +70,18 @@ a {
   height: 200px;
 }
 
-.user-nav-div{
+.nav_bar{
   width: 100%;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.user-nav-div{
+  background-color: darkcyan;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: right;
 }
 
 .map-container{
@@ -71,4 +94,15 @@ a {
 
 .life-point{
   position: absolute;
+}
+
+.restart-button{
+  background-color: black;
+  color: red;
+  cursor: pointer;
+}
+
+.restart-button:hover{
+  background-color: red;
+  color: black;
 }

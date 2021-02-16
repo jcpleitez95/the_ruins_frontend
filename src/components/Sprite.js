@@ -7,7 +7,7 @@ export default function Sprite({data, character, setCharacter}) {
     useEffect(() => {
         if(character.character.ammo > 0 && data.x === 576 && data.y === 1088){
             return (
-                
+               
                 <div style={{
                     display: "inline-block",
                     position: "absolute",
@@ -45,7 +45,7 @@ export default function Sprite({data, character, setCharacter}) {
         }
         else if(character.character.ammo > 0 && data.x === 576 && data.y === 1152){
             return (
-
+                
                 <div style={{
                     display: "inline-block",
                     position: "absolute",
@@ -84,7 +84,7 @@ export default function Sprite({data, character, setCharacter}) {
         }
         else if(character.character.ammo > 0 && data.x === 576 && data.y === 1216){
             return (
-
+                
                 <div style={{
                     display: "inline-block",
                     position: "absolute",
@@ -123,7 +123,7 @@ export default function Sprite({data, character, setCharacter}) {
         }
         else if(character.character.ammo > 0 && data.x === 576 && data.y === 1024){
             return (
-            
+               
                 <div style={{
                     display: "inline-block",
                     position: "absolute",

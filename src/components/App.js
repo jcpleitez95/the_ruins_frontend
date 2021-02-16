@@ -12,13 +12,15 @@ function App() {
   const [character, setCharacter] = useState("")
   
   useEffect(() => {
-    fetch("http://localhost:3000/characters/7")
+    fetch("http://localhost:3000/characters/10")
     .then(response => response.json())
     .then(data => setCharacter(data))
   }, []);
 
   function handleRestart(){
-        fetch("http://localhost:3000/characters/7",{
+    window.location.reload()
+    
+        fetch("http://localhost:3000/characters/10",{
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json"
@@ -30,7 +32,6 @@ function App() {
         .then(response => response.json())
         .then(data => {setCharacter(data)})
 
-        window.location.reload()
       };
 
 
@@ -47,12 +48,6 @@ function App() {
           </Route>
           <Route exact path="/about">
             <About/>
-          </Route>
-          <Route exact path="/login">
-            <Login/>
-          </Route>
-          <Route exact path="/signup">
-            <SignUp/>
           </Route>
         </Switch>
     </div>
